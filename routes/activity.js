@@ -1,16 +1,12 @@
-'use strict';
-
 // Deps
-const Path = require('path');
-const JWT = require(Path.join(__dirname, '..', 'lib', 'jwtDecoder.js'));
-const axios = require('axios');
-
-exports.logExecuteData = [];
+import Path from 'path';
+import axios from 'axios';
+import JWT from '../lib/jwtDecoder.js';
 
 /*
  * POST Handler for /execute/ route of Activity.
  */
-exports.execute = async function (req, res) {
+export async function execute(req, res) {
     try {
         // example on how to decode JWT
         JWT(req.body, process.env.jwtSecret, async (err, decoded) => {
@@ -27,8 +23,6 @@ exports.execute = async function (req, res) {
                 
                 // decoded in arguments
                 var decodedArgs = decoded.inArguments[0];
-                
-                console.log(`decoded args: ${JSON.stringify(decodedArgs, null, 2)}`);
 
                 // Below is an example of calling a third party service, you can modify the URL of the requestBin in the environment variables
                 if (process.env.requestBin) {
@@ -58,7 +52,7 @@ exports.execute = async function (req, res) {
 /*
  * POST Handler for /publish/ route of Activity.
  */
-exports.publish = function (req, res) {
+export async function publish(req, res) {
     console.log(`Publish Event: ${req.body.toString('utf8')}`);
     res.send(200, 'Publish');
 };
@@ -66,7 +60,7 @@ exports.publish = function (req, res) {
 /*
  * POST Handler for /validate/ route of Activity.
  */
-exports.validate = function (req, res) {
+export async function validate(req, res) {
     console.log(`Validate Event: ${req.body.toString('utf8')}`);
     res.send(200, 'Validate');
 };
@@ -75,7 +69,7 @@ exports.validate = function (req, res) {
 /*
  * POST Handler for / route of Activity (this is the edit route).
  */
-exports.edit = function (req, res) {
+export async function edit(req, res) {
     console.log(`Edit Event: ${req.body.toString('utf8')}`);
     res.send(200, 'Edit');
 };
@@ -83,7 +77,7 @@ exports.edit = function (req, res) {
 /*
  * POST Handler for /save/ route of Activity.
  */
-exports.save = function (req, res) {
+export async function save(req, res) {
     console.log(`Save Event: ${req.body.toString('utf8')}`);
     res.send(200, 'Save');
 };

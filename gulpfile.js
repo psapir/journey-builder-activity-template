@@ -1,5 +1,4 @@
-var gulp = require('gulp');
-const { prependListener } = require('gulp');
+import gulp from 'gulp';
 
 function movecss(done) {
  
@@ -9,4 +8,4 @@ function movecss(done) {
 
 var build = gulp.series(movecss);
 
-exports.default = build;
+export default build;
